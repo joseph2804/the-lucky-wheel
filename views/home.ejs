@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="zxx">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Vòng quay lì xì 2020 by GrouSrlpPrsc</title>
+    <title>Hương Việt Food</title>
+
+    <%- include('components/libs'); -%>
+</head>
+<div class="pyro">
+    <div class="before" style="z-index: 9999"></div>
+    <div class="after"></div>
+</div>
+
+<body>
+    <main class="main">
+        <div class="topheader">
+            <img class="responsive" style="z-index:99;top:50px; width: 15%; transform: translate(0, -70px);" src="img/hea2.png" />
+        </div>
+
+        <div id="caidat">
+            <img id="popup" src="img/popup.jpg" />
+            <div class="sotiendalixi" id="sotiendalixi"></div>
+            <div class="lichsulixi" id="lichsulixi"></div>
+            <div class="buttontatpopup" onClick="tatpopup()"></div>
+            <div class="buttonlammoi" id="lammoi" onClick="lammoi()"></div>
+            <div class="nenpopup"></div>
+        </div>
+
+        <div id="popupnhantien">
+            <img id="popuptien" src="img/popupnhantien.png" />
+            <div class="sotienpopupnhantien" id="sotienpopupnhantien"><img id="xuatsotienpopup" /></div>
+            <div class="lammoipopupnhantien" id="lammoi" onClick="lammoi()"></div>
+            <div class="nenpopup"></div>
+        </div>
+
+        <div class="vongquay">
+            <canvas id="canvas" width="450" height="450" data-responsiveMinWidth="180" data-responsiveScaleHeight="true"
+                data-responsiveMargin="50">
+            </canvas>
+            <div id="batdauquay" class="nutbatdau"></div>
+            <div onClick="startSpin();" class="nutquay"></div>
+        </div>
+
+        <img class="responsive2" style="position:fixed;z-index:99;top:0px;right:0px" src="img/hea1.png" />
+        <div
+            style="position:fixed;z-index:99;bottom:-50px;left:0;width:100%;height:500px;background:url(img/bot1.png) repeat-x bottom left;">
+        </div>
+        <!-- <img class="responsive3" style="position:fixed;z-index:99;bottom:20px;left:20px" src="img/bot2.png" /> -->
+        <div class="nutcaidat" style="position:fixed;bottom:0px;left:20px" onClick="mopopup()"></div>
+        <input type="range" id="manhornhe" style="position:fixed;bottom:2px;right:20px;z-index: 999"
+            onchange="laypower()" min="5" step="0.01" max="20" value="13">
+
+        <img style="position:fixed;z-index:99;top:2px;left:1px" src="img/banglixi.png" />
+        <div id="annhantien" style="display: none;">
+            <img class="buttonnhantien" style="position:fixed;z-index:99;top:153px;left:1px;cursor: pointer;"
+                src="img/nhantien.png" onclick="nhantien()" />
+            <img style="position:fixed;z-index:99;top:183px;left:24px;" src="img/muiten.gif" />
+        </div>
+
+        <div style="position:fixed;z-index:999;top:37px;left:40px;text-shadow: 2px 2px 5px #f7ff29;color: #f2f4be;"
+            id="xuatluotquay"></div>
+
+        <img style="position:fixed;z-index:999;top:105px;left:9px" id="xuatsotien" />
+
+    </main>
+
+    <audio id="votay">
+        <source src="sound/votay.mp3" type="audio/mpeg">
+    </audio>
+    <audio id="matluot">
+        <source src="sound/matluot.mp3" type="audio/mpeg">
+    </audio>
+    <audio id="dangquay">
+        <source src="sound/dangquay.mp3" type="audio/mpeg">
+    </audio>
+
+
+    <script src="js/TweenMax.min.js"></script>
+    <script src="js/sweetalert2.min.js"></script>
+    <script src="js/javascript-winwheel-2.8.0/Winwheel.js"></script>
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <script src="js/main.js"></script>
+</body>
+
+</html>
