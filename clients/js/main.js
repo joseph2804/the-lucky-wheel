@@ -240,7 +240,7 @@ function lammoi() {
     document.getElementById("popupnhantien").style.display = "none"; // Tắt popup nhận tiền
     Swal.fire({
         title: "Làm mới vòng quay!",
-        html: "<pre>Làm mới vòng quay sẽ xoá hết các vòng quay còn lại. \nLịch sử và tổng tiền lì xì vẫn giữ nguyên. \nChú ý nếu tải lại trang sẽ làm mất lịch sử và tổng tiền lì xì\nNhập mật khẩu để tiếp tục:</pre>",
+        text: "Làm mới vòng quay sẽ xoá hết các vòng quay còn lại. \nLịch sử và tổng tiền lì xì vẫn giữ nguyên. \nChú ý nếu tải lại trang sẽ làm mất lịch sử và tổng tiền lì xì\nNhập mật khẩu để tiếp tục:",
         // type: "input",
         showCancelButton: true, // Có hiển thị nút cancel không(true = có)
         // closeOnConfirm: false, // Có thể tắt popup khi nhấp Ok không (true = có)
@@ -297,8 +297,8 @@ function alertPrize(indicatedSegment) {
 
                 Swal.fire({
                     icon: 'error',
-                    html: "<pre>Bạn không nhận được đồng nào\nNhưng bạn còn lại " + (solanquay - dem) +
-                        " lần quay, cố gắng lên nào!</pre>",
+                    text: "Bạn không nhận được đồng nào\nNhưng bạn còn lại " + (solanquay - dem) +
+                        " lần quay, cố gắng lên nào!",
                     titleText: "Rất tiếc!"
                 });
             } else { // Nếu không quay vào 0k
@@ -310,8 +310,8 @@ function alertPrize(indicatedSegment) {
 
                 Swal.fire({
                     icon: 'success',
-                    html: "<pre>Bạn nhận được " + indicatedSegment.text + "\nBạn còn lại " + (solanquay -
-                        dem) + " lần quay\nChú ý: Nếu quay tiếp bạn sẽ mất số tiền trước đó!</pre>",
+                    text: "Bạn nhận được " + indicatedSegment.text + "\nBạn còn lại " + (solanquay -
+                        dem) + " lần quay\nChú ý: Nếu quay tiếp bạn sẽ mất số tiền trước đó!",
                     titleText: "Tết ấm no!"
                 });
             }
@@ -339,7 +339,7 @@ function alertPrize(indicatedSegment) {
 
                 Swal.fire({
                     icon: 'success',
-                    html: "<pre>Bạn nhận được " + indicatedSegment.text + "\nBạn đã hết lượt quay</pre>",
+                    text: "Bạn nhận được " + indicatedSegment.text + "\nBạn đã hết lượt quay",
                     titleText: "Tết ấm no!"
                 });
             }
