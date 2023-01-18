@@ -2,16 +2,41 @@
 var matkhau = "mycode";
 var solanquay = 5;
 let luckyAngle = 22.5;
-let listLuckyIndex = [1, 2, 5, 8]; // edit here to specific lucky cell
+let listLuckyIndex = [
+    {index: 1, percent: 900}, 
+    {index: 2, percent: 700}, 
+    {index: 5, percent: 800}, 
+    {index: 8, percent: 200}, 
+    {index: 6, percent: 50},
+    {index: 3, percent: 500}, 
+    {index: 4, percent: 600},
+]; // edit here to specific lucky cell
 let arrayLucky = []
-let numberOfLuckyItem = 4; // count lucky item
-let luckyIndex = Math.floor(Math.random() * numberOfLuckyItem)
+let numberOfLuckyItem = 7; // count lucky item
+let luckyIndex = 1
 let stopAngle = 22.5 + 45;
-
-for (let i = 0; i < numberOfLuckyItem; i++) {
-    arrayLucky[i] = (luckyAngle + 45 * (listLuckyIndex[i] - 1)) - 360;
+listLuckyIndex.sort((x, y) => {
+    if(x.percent > y.percent) {
+        return 1
+    }
+    else return - 1
+})
+// console.log(listLuckyIndex)
+for (let i = 0; i < listLuckyIndex.length; i++) {
+    arrayLucky[i] = (luckyAngle + 45 * (listLuckyIndex[i].index - 1)) - 360;
 }
 
+let percent = Math.floor(Math.random() * 1000)
+for (let i = 0; i < listLuckyIndex.length; i++) {
+    if(percent <= listLuckyIndex[i].percent) {
+        luckyIndex = listLuckyIndex[i].index
+        break
+    }
+    if(percent > 900) {
+        luckyIndex = 6
+        break
+    }
+}
 stopAngle = arrayLucky[luckyIndex]
 
 // Sau khi load trang sẽ yêu cầu nhập mật khẩu
@@ -67,7 +92,7 @@ let theWheel = new Winwheel({
     'responsive': true,
     'segments': [{
         'fillStyle': '#910f06',
-        'text': '10.000 VNĐ',
+        'text': '1.000 VNĐ',
         'size': winwheelPercentToDegrees(12.5),
         'textFontSize': 30,
         'textFillStyle': '#ffffff'
@@ -79,31 +104,31 @@ let theWheel = new Winwheel({
         'textFillStyle': '#ffffff'
     }, {
         'fillStyle': '#910f06',
-        'text': '500.000 VNĐ',
+        'text': '50.000 VNĐ',
         'size': winwheelPercentToDegrees(12.5),
         'textFontSize': 26,
         'textFillStyle': '#ffffff'
     }, {
         'fillStyle': '#ab6f03',
-        'text': '40.000 VNĐ',
+        'text': '5.000 VNĐ',
         'size': winwheelPercentToDegrees(12.5),
         'textFontSize': 24,
         'textFillStyle': '#ffffff'
     }, {
         'fillStyle': '#910f06',
-        'text': '50.000 VNĐ',
+        'text': '10.000 VNĐ',
         'size': winwheelPercentToDegrees(12.5),
         'textFontSize': 22,
         'textFillStyle': '#ffffff'
     }, {
         'fillStyle': '#ab6f03',
-        'text': '200.000 VNĐ',
+        'text': '100.000 VNĐ',
         'size': winwheelPercentToDegrees(12.5),
         'textFontSize': 20,
         'textFillStyle': '#ffffff'
     }, {
         'fillStyle': '#910f06',
-        'text': '100.000 VNĐ',
+        'text': '500.000 VNĐ',
         'size': winwheelPercentToDegrees(12.5),
         'textFontSize': 18,
         'textFillStyle': '#ffffff'
@@ -174,9 +199,19 @@ function laypower() {
 function startSpin() {
     // Nút quay không nhấp được khi đang chạy
     if (wheelSpinning == false) {
-        luckyIndex = Math.floor(Math.random() * numberOfLuckyItem)
+        let percent = Math.floor(Math.random() * 1000)
+        for (let i = 0; i < listLuckyIndex.length; i++) {
+            if(percent <= listLuckyIndex[i].percent) {
+                luckyIndex = i
+                break
+            }
+            if(percent > 900) {
+                luckyIndex = 6
+                break
+            }
+        }
         stopAngle = arrayLucky[luckyIndex]
-        console.log(luckyIndex, stopAngle)
+        console.log(percent, listLuckyIndex[luckyIndex].index)
         theWheel.animation.stopAngle = stopAngle
         // Dựa trên mức công suất được chọn, hãy điều chỉnh số vòng quay cho bánh xe, càng nhiều lần
         // để xoay với thời lượng của hình ảnh động thì bánh xe quay càng nhanh.
@@ -205,7 +240,7 @@ function lammoi() {
     document.getElementById("popupnhantien").style.display = "none"; // Tắt popup nhận tiền
     Swal.fire({
         title: "Làm mới vòng quay!",
-        text: "Làm mới vòng quay sẽ xoá hết các vòng quay còn lại. \nLịch sử và tổng tiền lì xì vẫn giữ nguyên. \nChú ý nếu tải lại trang sẽ làm mất lịch sử và tổng tiền lì xì\nNhập mật khẩu để tiếp tục:",
+        html: "<pre>Làm mới vòng quay sẽ xoá hết các vòng quay còn lại. \nLịch sử và tổng tiền lì xì vẫn giữ nguyên. \nChú ý nếu tải lại trang sẽ làm mất lịch sử và tổng tiền lì xì\nNhập mật khẩu để tiếp tục:</pre>",
         // type: "input",
         showCancelButton: true, // Có hiển thị nút cancel không(true = có)
         // closeOnConfirm: false, // Có thể tắt popup khi nhấp Ok không (true = có)
@@ -262,8 +297,8 @@ function alertPrize(indicatedSegment) {
 
                 Swal.fire({
                     icon: 'error',
-                    text: "Bạn không nhận được đồng nào\nNhưng bạn còn lại " + (solanquay - dem) +
-                        " lần quay, cố gắng lên nào!",
+                    html: "<pre>Bạn không nhận được đồng nào\nNhưng bạn còn lại " + (solanquay - dem) +
+                        " lần quay, cố gắng lên nào!</pre>",
                     titleText: "Rất tiếc!"
                 });
             } else { // Nếu không quay vào 0k
@@ -275,8 +310,8 @@ function alertPrize(indicatedSegment) {
 
                 Swal.fire({
                     icon: 'success',
-                    text: "Bạn nhận được " + indicatedSegment.text + "\nBạn còn lại " + (solanquay -
-                        dem) + " lần quay\nChú ý: Nếu quay tiếp bạn sẽ mất số tiền trước đó!",
+                    html: "<pre>Bạn nhận được " + indicatedSegment.text + "\nBạn còn lại " + (solanquay -
+                        dem) + " lần quay\nChú ý: Nếu quay tiếp bạn sẽ mất số tiền trước đó!</pre>",
                     titleText: "Tết ấm no!"
                 });
             }
@@ -304,7 +339,7 @@ function alertPrize(indicatedSegment) {
 
                 Swal.fire({
                     icon: 'success',
-                    text: "Bạn nhận được " + indicatedSegment.text + "\nBạn đã hết lượt quay",
+                    html: "<pre>Bạn nhận được " + indicatedSegment.text + "\nBạn đã hết lượt quay</pre>",
                     titleText: "Tết ấm no!"
                 });
             }
